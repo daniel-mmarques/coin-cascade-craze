@@ -11,12 +11,34 @@ interface SlotMachineProps {
 
 const symbols = ['🍒', '🍋', '🔔', '💎', '⭐', '7️⃣'];
 
+// 🎯 CONFIGURAÇÃO DE CHANCE DE VITÓRIA
+// Altere este valor para controlar a probabilidade de vitória:
+// 0.1 = 10% de chance, 0.2 = 20% de chance, 0.5 = 50% de chance, etc.
+const WIN_CHANCE = 0.15; // 15% de chance de vitória
+
 const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [results, setResults] = useState(['🍒', '🍋', '🔔']);
   const { toast } = useToast();
 
   const getRandomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
+
+  const generateResults = () => {
+    const shouldWin = Math.random() < WIN_CHANCE;
+    
+    if (shouldWin) {
+      // Forçar uma vitória - escolher um símbolo e repetir 3 vezes
+      const winningSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+      return [winningSymbol, winningSymbol, winningSymbol];
+    } else {
+      // Garantir que não há vitória - gerar símbolos diferentes
+      let newResults;
+      do {
+        newResults = [getRandomSymbol(), getRandomSymbol(), getRandomSymbol()];
+      } while (calculateWin(newResults) > 0);
+      return newResults;
+    }
+  };
 
   const calculateWin = (reels: string[]) => {
     const [first, second, third] = reels;
@@ -47,8 +69,8 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
     
     if (!onSpin()) {
       toast({
-        title: "Not enough coins!",
-        description: "You need at least 10 coins to spin.",
+        title: "Moedas insuficientes!",
+        description: "Você precisa de pelo menos 10 moedas para girar.",
         variant: "destructive",
       });
       return;
@@ -56,8 +78,8 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
 
     setIsSpinning(true);
     
-    // Generate new results
-    const newResults = [getRandomSymbol(), getRandomSymbol(), getRandomSymbol()];
+    // Generate new results with controlled win chance
+    const newResults = generateResults();
     setResults(newResults);
     
     // Wait for animation to finish
@@ -68,19 +90,19 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
       if (winAmount > 0) {
         onWin(winAmount);
         
-        let title = "You Win!";
+        let title = "Você Ganhou!";
         if (winAmount >= 1000) title = "🎉 JACKPOT! 🎉";
-        else if (winAmount >= 100) title = "🎊 Big Win! 🎊";
+        else if (winAmount >= 100) title = "🎊 Grande Vitória! 🎊";
         
         toast({
           title,
-          description: `You won ${winAmount} coins!`,
+          description: `Você ganhou ${winAmount} moedas!`,
           className: "bg-gradient-to-r from-yellow-400 to-orange-500 text-black border-none",
         });
       } else {
         toast({
-          title: "Try again!",
-          description: "Better luck next time!",
+          title: "Tente novamente!",
+          description: "Mais sorte na próxima vez!",
         });
       }
     }, 3000);
@@ -112,10 +134,10 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
           {isSpinning ? (
             <div className="flex items-center gap-2">
               <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
-              SPINNING...
+              GIRANDO...
             </div>
           ) : (
-            "🎰 SPIN 🎰"
+            "🎰 GIRAR 🎰"
           )}
         </Button>
       </div>
@@ -125,6 +147,11 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
         <div className="text-2xl animate-pulse">✨</div>
         <div className="text-2xl animate-pulse delay-300">💫</div>
         <div className="text-2xl animate-pulse delay-500">⭐</div>
+      </div>
+      
+      {/* Win Chance Display */}
+      <div className="text-center mt-4 text-sm text-white/60">
+        Taxa de vitória: {(WIN_CHANCE * 100).toFixed(1)}%
       </div>
     </div>
   );
