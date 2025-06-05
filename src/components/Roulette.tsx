@@ -129,9 +129,9 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
                   }}
                 >
                   <div 
-                    className={`absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-8 md:w-8 md:h-10 flex items-center justify-center text-xs md:text-sm font-bold text-white rounded border border-yellow-300 shadow-sm ${
-                      color === 'red' ? 'bg-gradient-to-b from-red-500 to-red-700' : 
-                      color === 'black' ? 'bg-gradient-to-b from-gray-800 to-black' : 'bg-gradient-to-b from-green-500 to-green-700'
+                    className={`absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-8 md:w-8 md:h-10 flex items-center justify-center text-xs md:text-sm font-bold text-white rounded border border-yellow-300 shadow-lg ${
+                      color === 'red' ? 'bg-gradient-to-b from-red-600 to-red-800 border-red-400' : 
+                      color === 'black' ? 'bg-gradient-to-b from-gray-900 to-black border-gray-600' : 'bg-gradient-to-b from-green-600 to-green-800 border-green-400'
                     }`}
                   >
                     {num}
