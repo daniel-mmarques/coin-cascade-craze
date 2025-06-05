@@ -110,7 +110,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           
           {/* Wheel with numbers */}
           <div 
-            className="absolute inset-2 rounded-full relative overflow-hidden transition-transform duration-4000 ease-out shadow-inner"
+            className="absolute inset-2 rounded-full relative overflow-hidden transition-transform duration-4000 ease-out shadow-inner bg-gradient-to-br from-amber-900 to-amber-800"
             style={{ 
               transform: `rotate(${wheelRotation}deg)`,
             }}
@@ -122,29 +122,30 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
               return (
                 <div
                   key={num}
-                  className={`absolute w-full h-full ${
-                    color === 'red' ? 'text-white' : 
-                    color === 'black' ? 'text-white' : 'text-white'
-                  }`}
+                  className="absolute w-full h-full"
                   style={{
                     transform: `rotate(${angle}deg)`,
                     transformOrigin: 'center center'
                   }}
                 >
                   <div 
-                    className={`absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-6 md:w-8 md:h-8 flex items-center justify-center text-xs md:text-sm font-bold ${
-                      color === 'red' ? 'bg-red-600' : 
-                      color === 'black' ? 'bg-black' : 'bg-green-600'
-                    } rounded border border-yellow-400`}
+                    className={`absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-8 md:w-8 md:h-10 flex items-center justify-center text-xs md:text-sm font-bold text-white rounded border border-yellow-300 shadow-sm ${
+                      color === 'red' ? 'bg-gradient-to-b from-red-500 to-red-700' : 
+                      color === 'black' ? 'bg-gradient-to-b from-gray-800 to-black' : 'bg-gradient-to-b from-green-500 to-green-700'
+                    }`}
                   >
                     {num}
                   </div>
+                  {/* Separator lines */}
+                  <div className="absolute top-0 left-1/2 w-px h-16 bg-gradient-to-b from-yellow-400 to-transparent transform -translate-x-1/2"></div>
                 </div>
               );
             })}
             
             {/* Center circle */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full border-4 border-yellow-800 shadow-lg"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 rounded-full border-4 border-yellow-800 shadow-lg flex items-center justify-center">
+              <div className="w-4 h-4 md:w-6 md:h-6 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-full"></div>
+            </div>
           </div>
           
           {/* Ball */}
@@ -152,11 +153,11 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
             className="absolute inset-0 transition-transform duration-4000 ease-out"
             style={{ transform: `rotate(${ballRotation}deg)` }}
           >
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-br from-white to-gray-300 rounded-full shadow-lg border border-gray-400 z-20"></div>
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-br from-white via-gray-100 to-gray-300 rounded-full shadow-xl border border-gray-400 z-20"></div>
           </div>
           
           {/* Pointer */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-red-500 z-30"></div>
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-red-500 z-30 drop-shadow-lg"></div>
         </div>
       </div>
 
@@ -165,8 +166,8 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
         <div className="text-center mb-6 relative z-10">
           <div className="text-white/70 text-sm mb-2">ÚLTIMO RESULTADO:</div>
           <div className={`inline-block px-6 py-3 rounded-full text-white font-bold text-xl md:text-2xl shadow-lg border-2 ${
-            getNumberColor(lastResult) === 'red' ? 'bg-red-600 border-red-400' :
-            getNumberColor(lastResult) === 'black' ? 'bg-black border-gray-400' : 'bg-green-600 border-green-400'
+            getNumberColor(lastResult) === 'red' ? 'bg-gradient-to-br from-red-500 to-red-700 border-red-400' :
+            getNumberColor(lastResult) === 'black' ? 'bg-gradient-to-br from-gray-800 to-black border-gray-400' : 'bg-gradient-to-br from-green-500 to-green-700 border-green-400'
           }`}>
             {lastResult}
           </div>
@@ -180,8 +181,8 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           disabled={isSpinning}
           className={`py-4 md:py-6 rounded-xl font-bold text-white text-sm md:text-base transition-all duration-200 ${
             selectedBet === 'red' 
-              ? 'bg-red-600 ring-4 ring-red-400 scale-105 shadow-lg' 
-              : 'bg-red-700 hover:bg-red-600 shadow-md hover:scale-102'
+              ? 'bg-gradient-to-br from-red-500 to-red-700 ring-4 ring-red-400 scale-105 shadow-lg' 
+              : 'bg-gradient-to-br from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 shadow-md hover:scale-102'
           }`}
         >
           🔴 VERMELHO<br/>
@@ -192,8 +193,8 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           disabled={isSpinning}
           className={`py-4 md:py-6 rounded-xl font-bold text-white text-sm md:text-base transition-all duration-200 ${
             selectedBet === 'black' 
-              ? 'bg-gray-800 ring-4 ring-gray-600 scale-105 shadow-lg' 
-              : 'bg-black hover:bg-gray-800 shadow-md hover:scale-102'
+              ? 'bg-gradient-to-br from-gray-700 to-black ring-4 ring-gray-500 scale-105 shadow-lg' 
+              : 'bg-gradient-to-br from-gray-800 to-black hover:from-gray-700 hover:to-gray-900 shadow-md hover:scale-102'
           }`}
         >
           ⚫ PRETO<br/>
@@ -204,8 +205,8 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           disabled={isSpinning}
           className={`py-4 md:py-6 rounded-xl font-bold text-white text-sm md:text-base transition-all duration-200 ${
             selectedBet === 'green' 
-              ? 'bg-green-600 ring-4 ring-green-400 scale-105 shadow-lg' 
-              : 'bg-green-700 hover:bg-green-600 shadow-md hover:scale-102'
+              ? 'bg-gradient-to-br from-green-500 to-green-700 ring-4 ring-green-400 scale-105 shadow-lg' 
+              : 'bg-gradient-to-br from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 shadow-md hover:scale-102'
           }`}
         >
           🟢 VERDE<br/>

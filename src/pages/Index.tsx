@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import SlotMachine from '@/components/SlotMachine';
-import Blackjack from '@/components/Blackjack';
+import Dice from '@/components/Dice';
 import Roulette from '@/components/Roulette';
 import CoinShop from '@/components/CoinShop';
 import CoinExplosion from '@/components/CoinExplosion';
 import { useCoins } from '@/hooks/useCoins';
 
-type GameType = 'slots' | 'blackjack' | 'roulette' | 'shop';
+type GameType = 'slots' | 'dice' | 'roulette' | 'shop';
 
 const Index = () => {
   const [showCoins, setShowCoins] = useState(false);
@@ -31,8 +31,8 @@ const Index = () => {
 
   const games = {
     slots: { name: '🎰 Slots', component: <SlotMachine onWin={handleWin} onSpin={handleSpin} /> },
-    blackjack: { name: '🃏 Blackjack', component: <Blackjack onWin={handleWin} onSpin={handleSpin} /> },
-    roulette: { name: '🎲 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
+    dice: { name: '🎲 Dados', component: <Dice onWin={handleWin} onSpin={handleSpin} /> },
+    roulette: { name: '🎡 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
     shop: { name: '🛒 Loja', component: <CoinShop onPurchase={handlePurchase} /> },
   };
 
@@ -105,10 +105,10 @@ const Index = () => {
               <p className="text-xs md:text-base">⭐ Estrela: 200 | 🍒 Cereja: 100 | 🔔 Sino: 50</p>
             </>
           )}
-          {currentGame === 'blackjack' && (
+          {currentGame === 'dice' && (
             <>
-              <p className="mb-2 text-sm md:text-base">🎯 Chegue o mais próximo de 21 sem estourar!</p>
-              <p className="text-xs md:text-base">💰 Ganhe: 20 moedas | Empate: 10 moedas</p>
+              <p className="mb-2 text-sm md:text-base">🎯 Aposte no resultado da soma dos dados!</p>
+              <p className="text-xs md:text-base">🎲 Baixo/Alto: 2x | Sete: 5x</p>
             </>
           )}
           {currentGame === 'roulette' && (
