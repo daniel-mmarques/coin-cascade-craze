@@ -122,10 +122,52 @@
   }
 }
 
+/* Animações da roleta */
+@keyframes roulette-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ball-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 .animate-fall {
   animation: fall 3s ease-in forwards;
 }
 
 .animate-spin-reel {
   animation: spin-reel 0.1s linear infinite;
+}
+
+.duration-4000 {
+  transition-duration: 4s;
+}
+
+/* Hover effects */
+.hover\:scale-102:hover {
+  transform: scale(1.02);
+}
+
+/* Casino atmosphere */
+@keyframes casino-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.8), 0 0 30px rgba(239, 68, 68, 0.4);
+  }
+}
+
+.casino-glow {
+  animation: casino-glow 2s ease-in-out infinite;
 }
