@@ -14,7 +14,7 @@ const symbols = ['🍒', '🍋', '🔔', '💎', '⭐', '7️⃣'];
 // 🎯 CONFIGURAÇÃO DE CHANCE DE VITÓRIA
 // Altere este valor para controlar a probabilidade de vitória:
 // 0.1 = 10% de chance, 0.2 = 20% de chance, 0.5 = 50% de chance, etc.
-const WIN_CHANCE = 0; // 15% de chance de vitória
+const WIN_CHANCE = 0.5; // 15% de chance de vitória
 
 const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
