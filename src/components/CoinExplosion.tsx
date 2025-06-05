@@ -14,9 +14,12 @@ const CoinExplosion = () => {
   const [coins, setCoins] = useState<Coin[]>([]);
 
   useEffect(() => {
-    // Generate coins que caem do topo
+    // Generate coins que caem do topo - menos moedas em mobile
+    const isMobile = window.innerWidth < 768;
+    const coinCount = isMobile ? 25 : 50;
+    
     const newCoins: Coin[] = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < coinCount; i++) {
       newCoins.push({
         id: i,
         x: Math.random() * window.innerWidth,
@@ -34,7 +37,7 @@ const CoinExplosion = () => {
       {coins.map((coin) => (
         <div
           key={coin.id}
-          className="absolute text-4xl animate-bounce"
+          className="absolute text-2xl md:text-4xl animate-bounce"
           style={{
             left: coin.x,
             top: coin.y,
@@ -58,12 +61,12 @@ const CoinExplosion = () => {
       
       {/* Efeito de confete */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-8xl animate-ping opacity-80">🎉</div>
+        <div className="text-4xl md:text-8xl animate-ping opacity-80">🎉</div>
       </div>
       
       {/* Texto de vitória animado */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-6xl font-bold text-yellow-400 animate-pulse drop-shadow-lg">
+      <div className="absolute inset-0 flex items-center justify-center px-4">
+        <div className="text-3xl md:text-6xl font-bold text-yellow-400 animate-pulse drop-shadow-lg text-center">
           <span className="animate-bounce inline-block" style={{ animationDelay: '0ms' }}>V</span>
           <span className="animate-bounce inline-block" style={{ animationDelay: '100ms' }}>I</span>
           <span className="animate-bounce inline-block" style={{ animationDelay: '200ms' }}>T</span>
@@ -75,10 +78,10 @@ const CoinExplosion = () => {
         </div>
       </div>
       
-      {/* Brilhos extras */}
-      <div className="absolute top-1/4 left-1/4 w-16 h-16 bg-yellow-400 rounded-full blur-xl animate-ping opacity-60"></div>
-      <div className="absolute top-1/3 right-1/4 w-12 h-12 bg-orange-400 rounded-full blur-xl animate-ping opacity-60" style={{ animationDelay: '500ms' }}></div>
-      <div className="absolute bottom-1/3 left-1/3 w-20 h-20 bg-yellow-300 rounded-full blur-xl animate-ping opacity-60" style={{ animationDelay: '1000ms' }}></div>
+      {/* Brilhos extras - menores em mobile */}
+      <div className="absolute top-1/4 left-1/4 w-8 h-8 md:w-16 md:h-16 bg-yellow-400 rounded-full blur-xl animate-ping opacity-60"></div>
+      <div className="absolute top-1/3 right-1/4 w-6 h-6 md:w-12 md:h-12 bg-orange-400 rounded-full blur-xl animate-ping opacity-60" style={{ animationDelay: '500ms' }}></div>
+      <div className="absolute bottom-1/3 left-1/3 w-10 h-10 md:w-20 md:h-20 bg-yellow-300 rounded-full blur-xl animate-ping opacity-60" style={{ animationDelay: '1000ms' }}></div>
     </div>
   );
 };

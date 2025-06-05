@@ -114,15 +114,15 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   };
 
   return (
-    <div className={`bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-8 shadow-2xl border-4 border-yellow-400/50 transition-all duration-300 ${showWinAnimation ? 'animate-pulse scale-105' : ''}`}>
+    <div className={`bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-2xl border-2 md:border-4 border-yellow-400/50 transition-all duration-300 max-w-sm md:max-w-none mx-auto ${showWinAnimation ? 'animate-pulse scale-105' : ''}`}>
       {/* Slot Machine Display */}
-      <div className="bg-black rounded-2xl p-6 mb-6 border-2 border-yellow-400/30 relative overflow-hidden">
+      <div className="bg-black rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 border-2 border-yellow-400/30 relative overflow-hidden">
         {/* Background animation when winning */}
         {showWinAnimation && (
           <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 via-orange-400/20 to-yellow-400/20 animate-pulse"></div>
         )}
         
-        <div className="flex gap-4 justify-center items-center relative z-10">
+        <div className="flex gap-2 md:gap-4 justify-center items-center relative z-10">
           {results.map((symbol, index) => (
             <SlotReel 
               key={index} 
@@ -139,11 +139,11 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
         <Button
           onClick={handleSpin}
           disabled={isSpinning}
-          className={`bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-xl px-12 py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 ${showWinAnimation ? 'animate-bounce' : ''}`}
+          className={`bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-base md:text-xl px-8 md:px-12 py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 w-full md:w-auto ${showWinAnimation ? 'animate-bounce' : ''}`}
         >
           {isSpinning ? (
-            <div className="flex items-center gap-2">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+            <div className="flex items-center justify-center gap-2">
+              <div className="animate-spin rounded-full h-5 w-5 md:h-6 md:w-6 border-b-2 border-white"></div>
               GIRANDO...
             </div>
           ) : (
@@ -153,14 +153,14 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
       </div>
 
       {/* Decorative elements */}
-      <div className="flex justify-between mt-4 text-yellow-400">
-        <div className="text-2xl animate-pulse">✨</div>
-        <div className="text-2xl animate-pulse delay-300">💫</div>
-        <div className="text-2xl animate-pulse delay-500">⭐</div>
+      <div className="flex justify-between mt-3 md:mt-4 text-yellow-400 px-2">
+        <div className="text-xl md:text-2xl animate-pulse">✨</div>
+        <div className="text-xl md:text-2xl animate-pulse delay-300">💫</div>
+        <div className="text-xl md:text-2xl animate-pulse delay-500">⭐</div>
       </div>
       
       {/* Win Chance Display */}
-      <div className="text-center mt-4 text-sm text-white/60">
+      <div className="text-center mt-3 md:mt-4 text-xs md:text-sm text-white/60">
         Taxa de vitória: {(WIN_CHANCE * 100).toFixed(1)}%
       </div>
     </div>

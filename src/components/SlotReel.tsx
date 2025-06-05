@@ -37,8 +37,8 @@ const SlotReel = ({ symbol, isSpinning, delay = 0 }: SlotReelProps) => {
     <div className="relative">
       <div 
         className={`
-          w-24 h-24 bg-gradient-to-b from-gray-700 via-gray-600 to-gray-800 rounded-xl 
-          flex items-center justify-center text-4xl font-bold
+          w-16 h-16 md:w-24 md:h-24 bg-gradient-to-b from-gray-700 via-gray-600 to-gray-800 rounded-lg md:rounded-xl 
+          flex items-center justify-center text-2xl md:text-4xl font-bold
           border-2 border-yellow-400/50 shadow-inner
           transition-all duration-200 transform
           ${spinning ? 'animate-pulse scale-110 rotate-2' : 'hover:scale-105'}
@@ -55,14 +55,14 @@ const SlotReel = ({ symbol, isSpinning, delay = 0 }: SlotReelProps) => {
       
       {/* Glow effect when spinning */}
       {spinning && (
-        <div className="absolute inset-0 rounded-xl bg-yellow-400/30 animate-pulse blur-sm"></div>
+        <div className="absolute inset-0 rounded-lg md:rounded-xl bg-yellow-400/30 animate-pulse blur-sm"></div>
       )}
       
       {/* Sparkles effect when not spinning */}
       {!spinning && (
         <>
-          <div className="absolute -top-2 -right-2 text-xs animate-ping opacity-70">✨</div>
-          <div className="absolute -bottom-2 -left-2 text-xs animate-ping opacity-70" style={{ animationDelay: '500ms' }}>⭐</div>
+          <div className="absolute -top-1 -right-1 md:-top-2 md:-right-2 text-xs animate-ping opacity-70">✨</div>
+          <div className="absolute -bottom-1 -left-1 md:-bottom-2 md:-left-2 text-xs animate-ping opacity-70" style={{ animationDelay: '500ms' }}>⭐</div>
         </>
       )}
     </div>
