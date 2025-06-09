@@ -26,7 +26,7 @@ const CoinExplosion = () => {
         y: -100 - Math.random() * 200, // Começam acima da tela
         delay: Math.random() * 2000,
         rotation: Math.random() * 360,
-        velocity: 3 + Math.random() * 4, // Velocidade de queda
+        velocity: 3 + Math.random() * 5, // Velocidade de queda
       });
     }
     setCoins(newCoins);
