@@ -15,15 +15,15 @@ const Withdrawal = ({ coins, onWithdraw }: WithdrawalProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
 
-  const coinValue = 0.25; // R$ 0,18 por moeda (reduzido para desincentivar saques)
+  const coinValue = 0.25;
   const minWithdrawCoins = 100; // Mínimo de 100 moedas para sacar
-  const withdrawalFee = 0.05; // Taxa de saque de 15%
+  const withdrawalFee = 0.05; // Taxa de saque de 5%
   const withdrawalValue = withdrawAmount * coinValue;
   const feeAmount = withdrawalValue * withdrawalFee;
   const finalAmount = withdrawalValue - feeAmount;
 
   // Calcula quantas rodadas grátis o usuário perderia
-  const freeSpinsLost = Math.floor(withdrawAmount / 5); // 5 moedas por rodada
+  const freeSpinsLost = Math.floor(withdrawAmount / 4); // 4 moedas por rodada
 
   const handleWithdraw = async () => {
     if (withdrawAmount < minWithdrawCoins) {
@@ -124,7 +124,7 @@ const Withdrawal = ({ coins, onWithdraw }: WithdrawalProps) => {
             R$ {withdrawalValue.toFixed(2)}
           </div>
           <div className="text-xs text-red-400 mb-1">
-            - Taxa de saque: R$ {feeAmount.toFixed(2)} (15%)
+            - Taxa de saque: R$ {feeAmount.toFixed(2)} (5%)
           </div>
           <div className="text-2xl font-bold text-emerald-400">
             R$ {finalAmount.toFixed(2)}
