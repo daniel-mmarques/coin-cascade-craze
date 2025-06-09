@@ -253,7 +253,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
             GIRANDO A ROLETA...
           </div>
         ) : (
-          `🎲 GIRAR ROLETA (${betAmount} moedas)`
+          `🎲 GIRAR ROLETA`
         )}
       </Button>
         </div>
