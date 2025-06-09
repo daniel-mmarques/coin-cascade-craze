@@ -9,19 +9,19 @@ interface CoinShopProps {
 
 const CoinShop = ({ onPurchase }: CoinShopProps) => {
   const { toast } = useToast();
-  const [timeLeft, setTimeLeft] = useState(300); // 5 minutos de oferta especial
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutos de oferta especial
   const [showUrgency, setShowUrgency] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
-          setTimeLeft(300); // Reinicia o timer
-          return 300;
+          setTimeLeft(900); // Reinicia o timer
+          return 900;
         }
         return prev - 1;
       });
-    }, 1000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, []);
@@ -34,38 +34,38 @@ const CoinShop = ({ onPurchase }: CoinShopProps) => {
 
   const packages = [
     { 
-      coins: 25, 
+      coins: 20, 
       price: 'R$ 5,00', 
       bonus: 5, 
-      pricePerCoin: 0.20,
+      pricePerCoin: 0.25,
       popular: false 
     },
     { 
-      coins: 50, 
+      coins: 40, 
       price: 'R$ 10,00', 
-      bonus: 15, 
-      pricePerCoin: 0.20,
+      bonus: 10, 
+      pricePerCoin: 0.25,
       popular: false 
     },
     { 
       coins: 100, 
       price: 'R$ 20,00', 
-      bonus: 35, 
-      pricePerCoin: 0.20,
+      bonus: 20, 
+      pricePerCoin: 0.25,
       popular: true 
     },
     { 
-      coins: 250, 
+      coins: 200, 
       price: 'R$ 50,00', 
-      bonus: 100, 
-      pricePerCoin: 0.20,
+      bonus: 50, 
+      pricePerCoin: 0.25,
       popular: false 
     },
     { 
-      coins: 500, 
+      coins: 400, 
       price: 'R$ 100,00', 
-      bonus: 250, 
-      pricePerCoin: 0.20,
+      bonus: 100, 
+      pricePerCoin: 0.25,
       popular: false,
       vip: true 
     },
