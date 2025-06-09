@@ -226,7 +226,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
             ROLANDO OS DADOS...
           </div>
         ) : (
-          `🎲 ROLAR DADOS (${betAmount} moedas)`
+          `🎲 ROLAR DADOS`
         )}
       </Button>
         </div>
