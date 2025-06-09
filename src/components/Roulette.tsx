@@ -241,10 +241,11 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
       </div>
 
       {/* Spin Button */}
+      <div className="text-center">
       <Button
         onClick={spin}
         disabled={isSpinning || !selectedBet}
-        className="flex items-center justify-center w-3/5 bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 relative z-10 border-2 border-red-400"
+        className="w-3/5 bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 relative z-10 border-2 border-red-400"
       >
         {isSpinning ? (
           <div className="flex items-center justify-center gap-2">
@@ -255,6 +256,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           `🎲 GIRAR ROLETA (${betAmount} moedas)`
         )}
       </Button>
+        </div>
 
       {/* Casino atmosphere */}
       <div className="absolute bottom-2 left-2 text-red-500/30 text-2xl animate-pulse">♠️</div>
