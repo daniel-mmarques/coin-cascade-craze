@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import SlotMachine from '@/components/SlotMachine';
@@ -8,8 +7,9 @@ import Blackjack from '@/components/Blackjack';
 import CoinShop from '@/components/CoinShop';
 import CoinExplosion from '@/components/CoinExplosion';
 import { useCoins } from '@/hooks/useCoins';
+import Withdrawal from '@/components/Withdrawal';
 
-type GameType = 'slots' | 'dice' | 'roulette' | 'blackjack' | 'shop';
+type GameType = 'slots' | 'dice' | 'roulette' | 'blackjack' | 'shop' | 'withdrawal';
 
 const Index = () => {
   const [showCoins, setShowCoins] = useState(false);
@@ -30,12 +30,17 @@ const Index = () => {
     addCoins(amount);
   };
 
+  const handleWithdraw = (withdrawAmount: number) => {
+    return spendCoins(withdrawAmount);
+  };
+
   const games = {
     slots: { name: '🎰 Slots', component: <SlotMachine onWin={handleWin} onSpin={handleSpin} /> },
     dice: { name: '🎲 Dados', component: <Dice onWin={handleWin} onSpin={handleSpin} /> },
     roulette: { name: '🎡 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
     blackjack: { name: '🃏 Blackjack', component: <Blackjack onWin={handleWin} onSpin={handleSpin} /> },
     shop: { name: '🛒 Loja', component: <CoinShop onPurchase={handlePurchase} /> },
+    withdrawal: { name: '💳 Saque', component: <Withdrawal coins={coins} onWithdraw={handleWithdraw} /> },
   };
 
   return (
@@ -132,6 +137,11 @@ const Index = () => {
           {currentGame === 'shop' && (
             <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
               <p className="text-sm text-gray-300">💳 Compre moedas para continuar jogando! Apenas R$ 0,20 por moeda</p>
+            </div>
+          )}
+          {currentGame === 'withdrawal' && (
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="text-sm text-gray-300">💰 Converta suas moedas em dinheiro real via PIX! Mínimo de 50 moedas</p>
             </div>
           )}
         </div>
