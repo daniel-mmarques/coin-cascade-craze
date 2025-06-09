@@ -231,13 +231,14 @@ const Blackjack = ({ onWin, onSpin }: BlackjackProps) => {
               </Button>
             </div>
           </div>
-
+          <div className="text-center">
           <Button
             onClick={startGame}
-            className="w-full bg-gradient-to-r from-green-600 via-green-700 to-green-800 hover:from-green-700 hover:via-green-800 hover:to-green-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 relative z-10 border-2 border-green-400"
+            className="w-3/6 bg-gradient-to-r from-green-600 via-green-700 to-green-800 hover:from-green-700 hover:via-green-800 hover:to-green-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 relative z-10 border-2 border-green-400"
           >
             🃏 INICIAR JOGO ({betAmount} moedas)
           </Button>
+            </div>
         </>
       ) : (
         <>
