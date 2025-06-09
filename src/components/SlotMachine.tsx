@@ -43,12 +43,12 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
     
     if (first === second && second === third) {
       switch (first) {
-        case '💎': return 100; // 100x multiplier
-        case '7️⃣': return 50;  // 50x multiplier
-        case '⭐': return 20;   // 20x multiplier
+        case '💎': return 50; // 100x multiplier
+        case '7️⃣': return 25;  // 50x multiplier
+        case '⭐': return 15;   // 20x multiplier
         case '🍒': return 10;   // 10x multiplier
-        case '🔔': return 5;    // 5x multiplier
-        case '🍋': return 3;    // 3x multiplier
+        case '🔔': return 8;    // 5x multiplier
+        case '🍋': return 4;    // 3x multiplier
         default: return 2;      // 2x multiplier
       }
     }
