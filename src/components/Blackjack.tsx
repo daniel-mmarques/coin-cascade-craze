@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { shouldPlayerWin } from '@/config/gameConfig';
 
 interface BlackjackProps {
   onWin: (amount: number) => void;
@@ -69,6 +69,30 @@ const Blackjack = ({ onWin, onSpin }: BlackjackProps) => {
     return value;
   };
 
+  const generateControlledGame = () => {
+    const willWin = shouldPlayerWin();
+    const deck = createDeck();
+    
+    if (willWin) {
+      // Gerar jogo favorável ao jogador
+      const playerCard1 = { suit: '♠️', value: 'K', numValue: 10 };
+      const playerCard2 = { suit: '♥️', value: 'A', numValue: 11 };
+      const dealerCard1 = { suit: '♣️', value: '6', numValue: 6 };
+      const dealerCard2 = { suit: '♦️', value: '5', numValue: 5 };
+      
+      return {
+        playerCards: [playerCard1, playerCard2],
+        dealerCards: [dealerCard1, dealerCard2]
+      };
+    } else {
+      // Gerar jogo normal (mais difícil)
+      return {
+        playerCards: [deck[0], deck[2]],
+        dealerCards: [deck[1], deck[3]]
+      };
+    }
+  };
+
   const startGame = () => {
     if (!onSpin(betAmount)) {
       toast({
@@ -79,9 +103,9 @@ const Blackjack = ({ onWin, onSpin }: BlackjackProps) => {
       return;
     }
 
-    const deck = createDeck();
-    const newPlayerCards = [deck[0], deck[2]];
-    const newDealerCards = [deck[1], deck[3]];
+    const gameSetup = generateControlledGame();
+    const newPlayerCards = gameSetup.playerCards;
+    const newDealerCards = gameSetup.dealerCards;
     
     setPlayerCards(newPlayerCards);
     setDealerCards(newDealerCards);

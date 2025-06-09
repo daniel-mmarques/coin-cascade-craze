@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import SlotReel from './SlotReel';
 import { useToast } from '@/hooks/use-toast';
+import { shouldPlayerWin } from '@/config/gameConfig';
 
 interface SlotMachineProps {
   onWin: (amount: number) => void;
@@ -10,9 +10,6 @@ interface SlotMachineProps {
 }
 
 const symbols = ['🍒', '🍋', '🔔', '💎', '⭐', '7️⃣'];
-
-// 🎯 CONFIGURAÇÃO DE CHANCE DE VITÓRIA
-const WIN_CHANCE = 0.10; // 10% de chance de vitória
 
 const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
@@ -24,9 +21,9 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   const getRandomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
 
   const generateResults = () => {
-    const shouldWin = Math.random() < WIN_CHANCE;
+    const willWin = shouldPlayerWin();
     
-    if (shouldWin) {
+    if (willWin) {
       const winningSymbol = symbols[Math.floor(Math.random() * symbols.length)];
       return [winningSymbol, winningSymbol, winningSymbol];
     } else {

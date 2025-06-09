@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { shouldPlayerWin } from '@/config/gameConfig';
 
 interface RouletteProps {
   onWin: (amount: number) => void;
@@ -47,7 +48,25 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
 
     setIsSpinning(true);
     
-    const winningNumber = Math.floor(Math.random() * 37);
+    const willWin = shouldPlayerWin();
+    let winningNumber;
+    
+    if (willWin) {
+      // Gerar número vitorioso baseado na aposta
+      if (selectedBet === 'green') {
+        winningNumber = 0;
+      } else if (selectedBet === 'red') {
+        winningNumber = redNumbers[Math.floor(Math.random() * redNumbers.length)];
+      } else { // black
+        winningNumber = blackNumbers[Math.floor(Math.random() * blackNumbers.length)];
+      }
+    } else {
+      // Gerar número perdedor
+      do {
+        winningNumber = Math.floor(Math.random() * 37);
+      } while (getNumberColor(winningNumber) === selectedBet);
+    }
+    
     const winningColor = getNumberColor(winningNumber);
     
     // Animate the wheel and ball
@@ -68,10 +87,10 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
       
       if (selectedBet === winningColor) {
         if (winningColor === 'green') {
-          multiplier = 35; // 35x payout for green
+          multiplier = 35;
           message = '🎉 VERDE! Pagamento 35x!';
         } else {
-          multiplier = 2; // 2x payout for red/black
+          multiplier = 2;
           message = `🎉 ${winningColor.toUpperCase()}! Você ganhou!`;
         }
         

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { shouldPlayerWin } from '@/config/gameConfig';
 
 interface DiceProps {
   onWin: (amount: number) => void;
@@ -47,10 +48,51 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
     setTimeout(() => {
       clearInterval(rollAnimation);
       
-      const finalDice1 = Math.floor(Math.random() * 6) + 1;
-      const finalDice2 = Math.floor(Math.random() * 6) + 1;
-      const sum = finalDice1 + finalDice2;
+      const willWin = shouldPlayerWin();
+      let finalDice1, finalDice2, sum;
       
+      if (willWin) {
+        // Gerar resultado vitorioso baseado na aposta
+        if (selectedBet === 'seven') {
+          finalDice1 = Math.floor(Math.random() * 6) + 1;
+          finalDice2 = 7 - finalDice1;
+          if (finalDice2 < 1 || finalDice2 > 6) {
+            finalDice1 = 3;
+            finalDice2 = 4;
+          }
+        } else if (selectedBet === 'high') {
+          // Gerar soma entre 8-12
+          sum = 8 + Math.floor(Math.random() * 5);
+          finalDice1 = Math.min(6, Math.max(1, Math.floor(Math.random() * 6) + 1));
+          finalDice2 = sum - finalDice1;
+          if (finalDice2 < 1 || finalDice2 > 6) {
+            finalDice1 = 4;
+            finalDice2 = 4;
+          }
+        } else { // low
+          // Gerar soma entre 2-6
+          sum = 2 + Math.floor(Math.random() * 5);
+          finalDice1 = Math.min(6, Math.max(1, Math.floor(Math.random() * 6) + 1));
+          finalDice2 = sum - finalDice1;
+          if (finalDice2 < 1 || finalDice2 > 6) {
+            finalDice1 = 2;
+            finalDice2 = 3;
+          }
+        }
+      } else {
+        // Gerar resultado perdedor
+        do {
+          finalDice1 = Math.floor(Math.random() * 6) + 1;
+          finalDice2 = Math.floor(Math.random() * 6) + 1;
+          sum = finalDice1 + finalDice2;
+        } while (
+          (selectedBet === 'high' && sum >= 8) ||
+          (selectedBet === 'low' && sum <= 6) ||
+          (selectedBet === 'seven' && sum === 7)
+        );
+      }
+      
+      sum = finalDice1 + finalDice2;
       setDice1(finalDice1);
       setDice2(finalDice2);
       setLastSum(sum);
@@ -65,10 +107,10 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
         (selectedBet === 'seven' && sum === 7)
       ) {
         if (selectedBet === 'seven') {
-          multiplier = 5; // 5x payout for seven
+          multiplier = 5;
           message = '🎉 SETE! Pagamento 5x!';
         } else {
-          multiplier = 2; // 2x payout for high/low
+          multiplier = 2;
           message = `🎉 ${selectedBet.toUpperCase()}! Você ganhou!`;
         }
         
