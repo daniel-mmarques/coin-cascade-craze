@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 
 interface RouletteProps {
   onWin: (amount: number) => void;
-  onSpin: () => boolean;
+  onSpin: (amount: number) => boolean;
 }
 
 const Roulette = ({ onWin, onSpin }: RouletteProps) => {
@@ -14,6 +14,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
   const [lastResult, setLastResult] = useState<number | null>(null);
   const [wheelRotation, setWheelRotation] = useState(0);
   const [ballRotation, setBallRotation] = useState(0);
+  const [betAmount, setBetAmount] = useState(5);
   const { toast } = useToast();
 
   const numbers = Array.from({ length: 37 }, (_, i) => i); // 0-36
@@ -35,10 +36,10 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
       return;
     }
 
-    if (!onSpin()) {
+    if (!onSpin(betAmount)) {
       toast({
         title: "Moedas insuficientes!",
-        description: "Você precisa de pelo menos 10 moedas para jogar.",
+        description: `Você precisa de pelo menos ${betAmount} moedas para apostar.`,
         variant: "destructive",
       });
       return;
@@ -62,18 +63,19 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
       setLastResult(winningNumber);
       setIsSpinning(false);
       
-      let winAmount = 0;
+      let multiplier = 0;
       let message = '';
       
       if (selectedBet === winningColor) {
         if (winningColor === 'green') {
-          winAmount = 350; // 35x payout for green
+          multiplier = 35; // 35x payout for green
           message = '🎉 VERDE! Pagamento 35x!';
         } else {
-          winAmount = 20; // 2x payout for red/black
+          multiplier = 2; // 2x payout for red/black
           message = `🎉 ${winningColor.toUpperCase()}! Você ganhou!`;
         }
         
+        const winAmount = multiplier * betAmount;
         onWin(winAmount);
         toast({
           title: message,
@@ -174,6 +176,30 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
         </div>
       )}
 
+      {/* Bet Amount Selector */}
+      <div className="mb-4 text-center relative z-10">
+        <div className="text-white/70 text-sm mb-2">VALOR DA APOSTA:</div>
+        <div className="flex justify-center items-center gap-2">
+          <Button
+            onClick={() => setBetAmount(Math.max(5, betAmount - 5))}
+            disabled={isSpinning || betAmount <= 5}
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-sm"
+          >
+            -5
+          </Button>
+          <div className="bg-black/50 px-4 py-2 rounded-lg border border-yellow-400/30">
+            <span className="text-yellow-400 font-bold text-lg">{betAmount} 🪙</span>
+          </div>
+          <Button
+            onClick={() => setBetAmount(betAmount + 5)}
+            disabled={isSpinning}
+            className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm"
+          >
+            +5
+          </Button>
+        </div>
+      </div>
+
       {/* Betting Options */}
       <div className="grid grid-cols-3 gap-3 mb-6 relative z-10">
         <Button
@@ -226,7 +252,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
             GIRANDO A ROLETA...
           </div>
         ) : (
-          "🎲 GIRAR ROLETA (10 moedas)"
+          `🎲 GIRAR ROLETA (${betAmount} moedas)`
         )}
       </Button>
 

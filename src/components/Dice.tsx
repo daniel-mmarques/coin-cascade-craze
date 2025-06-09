@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 
 interface DiceProps {
   onWin: (amount: number) => void;
-  onSpin: () => boolean;
+  onSpin: (amount: number) => boolean;
 }
 
 const Dice = ({ onWin, onSpin }: DiceProps) => {
@@ -14,6 +14,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
   const [isRolling, setIsRolling] = useState(false);
   const [selectedBet, setSelectedBet] = useState<'high' | 'low' | 'seven' | null>(null);
   const [lastSum, setLastSum] = useState<number | null>(null);
+  const [betAmount, setBetAmount] = useState(5);
   const { toast } = useToast();
 
   const rollDice = async () => {
@@ -26,10 +27,10 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
       return;
     }
 
-    if (!onSpin()) {
+    if (!onSpin(betAmount)) {
       toast({
         title: "Moedas insuficientes!",
-        description: "Você precisa de pelo menos 10 moedas para jogar.",
+        description: `Você precisa de pelo menos ${betAmount} moedas para apostar.`,
         variant: "destructive",
       });
       return;
@@ -55,7 +56,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
       setLastSum(sum);
       setIsRolling(false);
       
-      let winAmount = 0;
+      let multiplier = 0;
       let message = '';
       
       if (
@@ -64,13 +65,14 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
         (selectedBet === 'seven' && sum === 7)
       ) {
         if (selectedBet === 'seven') {
-          winAmount = 50; // 5x payout for seven
+          multiplier = 5; // 5x payout for seven
           message = '🎉 SETE! Pagamento 5x!';
         } else {
-          winAmount = 20; // 2x payout for high/low
+          multiplier = 2; // 2x payout for high/low
           message = `🎉 ${selectedBet.toUpperCase()}! Você ganhou!`;
         }
         
+        const winAmount = multiplier * betAmount;
         onWin(winAmount);
         toast({
           title: message,
@@ -147,6 +149,30 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
         </div>
       )}
 
+      {/* Bet Amount Selector */}
+      <div className="mb-4 text-center relative z-10">
+        <div className="text-white/70 text-sm mb-2">VALOR DA APOSTA:</div>
+        <div className="flex justify-center items-center gap-2">
+          <Button
+            onClick={() => setBetAmount(Math.max(5, betAmount - 5))}
+            disabled={isRolling || betAmount <= 5}
+            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 text-sm"
+          >
+            -5
+          </Button>
+          <div className="bg-black/50 px-4 py-2 rounded-lg border border-yellow-400/30">
+            <span className="text-yellow-400 font-bold text-lg">{betAmount} 🪙</span>
+          </div>
+          <Button
+            onClick={() => setBetAmount(betAmount + 5)}
+            disabled={isRolling}
+            className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 text-sm"
+          >
+            +5
+          </Button>
+        </div>
+      </div>
+
       {/* Betting Options */}
       <div className="grid grid-cols-3 gap-3 mb-6 relative z-10">
         <Button
@@ -199,7 +225,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
             ROLANDO OS DADOS...
           </div>
         ) : (
-          "🎲 ROLAR DADOS (10 moedas)"
+          `🎲 ROLAR DADOS (${betAmount} moedas)`
         )}
       </Button>
 

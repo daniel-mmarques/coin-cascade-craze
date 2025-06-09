@@ -4,11 +4,12 @@ import { Button } from '@/components/ui/button';
 import SlotMachine from '@/components/SlotMachine';
 import Dice from '@/components/Dice';
 import Roulette from '@/components/Roulette';
+import Blackjack from '@/components/Blackjack';
 import CoinShop from '@/components/CoinShop';
 import CoinExplosion from '@/components/CoinExplosion';
 import { useCoins } from '@/hooks/useCoins';
 
-type GameType = 'slots' | 'dice' | 'roulette' | 'shop';
+type GameType = 'slots' | 'dice' | 'roulette' | 'blackjack' | 'shop';
 
 const Index = () => {
   const [showCoins, setShowCoins] = useState(false);
@@ -21,8 +22,8 @@ const Index = () => {
     setTimeout(() => setShowCoins(false), 3000);
   };
 
-  const handleSpin = () => {
-    return spendCoins(10);
+  const handleSpin = (betAmount: number) => {
+    return spendCoins(betAmount);
   };
 
   const handlePurchase = (amount: number) => {
@@ -33,6 +34,7 @@ const Index = () => {
     slots: { name: '🎰 Slots', component: <SlotMachine onWin={handleWin} onSpin={handleSpin} /> },
     dice: { name: '🎲 Dados', component: <Dice onWin={handleWin} onSpin={handleSpin} /> },
     roulette: { name: '🎡 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
+    blackjack: { name: '🃏 Blackjack', component: <Blackjack onWin={handleWin} onSpin={handleSpin} /> },
     shop: { name: '🛒 Loja', component: <CoinShop onPurchase={handlePurchase} /> },
   };
 
@@ -63,7 +65,7 @@ const Index = () => {
             🎰 CASINO DO TIGRINHO 🐅
           </h1>
           <p className="text-sm md:text-xl text-white/80 animate-fade-in px-4">
-            Três jogos emocionantes! Cada jogada custa 10 moedas
+            Quatro jogos emocionantes! Aposte a partir de 5 moedas
           </p>
         </div>
 
@@ -101,8 +103,8 @@ const Index = () => {
           {currentGame === 'slots' && (
             <>
               <p className="mb-2 text-sm md:text-base">🎯 Combine 3 símbolos para ganhar!</p>
-              <p className="mb-2 text-sm md:text-base">💎 Diamante: 1000 moedas | 7️⃣ Sete: 500 moedas</p>
-              <p className="text-xs md:text-base">⭐ Estrela: 200 | 🍒 Cereja: 100 | 🔔 Sino: 50</p>
+              <p className="mb-2 text-sm md:text-base">💎 Diamante: 100x | 7️⃣ Sete: 50x</p>
+              <p className="text-xs md:text-base">⭐ Estrela: 20x | 🍒 Cereja: 10x | 🔔 Sino: 5x</p>
             </>
           )}
           {currentGame === 'dice' && (
@@ -117,8 +119,14 @@ const Index = () => {
               <p className="text-xs md:text-base">🔴🔵 Vermelho/Preto: 2x | 🟢 Verde: 35x</p>
             </>
           )}
+          {currentGame === 'blackjack' && (
+            <>
+              <p className="mb-2 text-sm md:text-base">🎯 Chegue o mais próximo de 21!</p>
+              <p className="text-xs md:text-base">🃏 Blackjack: 2.5x | Vitória normal: 2x</p>
+            </>
+          )}
           {currentGame === 'shop' && (
-            <p className="text-xs md:text-base">💳 Compre moedas para continuar jogando!</p>
+            <p className="text-xs md:text-base">💳 Compre moedas para continuar jogando! Apenas R$ 0,20 por moeda</p>
           )}
         </div>
       </div>
