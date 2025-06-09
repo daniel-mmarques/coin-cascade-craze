@@ -12,7 +12,7 @@ interface SlotMachineProps {
 const symbols = ['🍒', '🍋', '🔔', '💎', '⭐', '7️⃣'];
 
 // 🎯 CONFIGURAÇÃO DE CHANCE DE VITÓRIA
-const WIN_CHANCE = 0.15; // 15% de chance de vitória
+const WIN_CHANCE = 0.10; // 15% de chance de vitória
 
 const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
