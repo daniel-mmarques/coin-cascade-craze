@@ -15,9 +15,9 @@ const Withdrawal = ({ coins, onWithdraw }: WithdrawalProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { toast } = useToast();
 
-  const coinValue = 0.18; // R$ 0,18 por moeda (reduzido para desincentivar saques)
+  const coinValue = 0.25; // R$ 0,18 por moeda (reduzido para desincentivar saques)
   const minWithdrawCoins = 100; // Mínimo de 100 moedas para sacar
-  const withdrawalFee = 0.15; // Taxa de saque de 15%
+  const withdrawalFee = 0.05; // Taxa de saque de 15%
   const withdrawalValue = withdrawAmount * coinValue;
   const feeAmount = withdrawalValue * withdrawalFee;
   const finalAmount = withdrawalValue - feeAmount;
