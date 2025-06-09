@@ -176,11 +176,6 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
         <div className="text-xl md:text-2xl animate-pulse delay-300">💫</div>
         <div className="text-xl md:text-2xl animate-pulse delay-500">⭐</div>
       </div>
-      
-      {/* Win Chance Display */}
-      <div className="text-center mt-3 md:mt-4 text-xs md:text-sm text-white/60">
-        Taxa de vitória: {(WIN_CHANCE * 100).toFixed(1)}%
-      </div>
     </div>
   );
 };
