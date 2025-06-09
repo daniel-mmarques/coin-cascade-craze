@@ -49,7 +49,7 @@ const CoinShop = ({ onPurchase }: CoinShopProps) => {
     },
     { 
       coins: 100, 
-      price: 'R$ 20,00', 
+      price: 'R$ 25,00', 
       bonus: 20, 
       pricePerCoin: 0.25,
       popular: true 
