@@ -244,7 +244,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
       <Button
         onClick={spin}
         disabled={isSpinning || !selectedBet}
-        className="w-full bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 relative z-10 border-2 border-red-400"
+        className="w-3/4 bg-gradient-to-r from-red-600 via-red-700 to-red-800 hover:from-red-700 hover:via-red-800 hover:to-red-900 text-white font-bold text-base md:text-xl py-3 md:py-4 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100 relative z-10 border-2 border-red-400"
       >
         {isSpinning ? (
           <div className="flex items-center justify-center gap-2">
