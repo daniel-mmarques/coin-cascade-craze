@@ -39,55 +39,51 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 md:top-20 md:left-20 w-16 h-16 md:w-32 md:h-32 bg-yellow-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 md:bottom-20 md:right-20 w-20 h-20 md:w-40 md:h-40 bg-pink-400 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 w-32 h-32 md:w-60 md:h-60 bg-cyan-400 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black relative overflow-hidden">
+      {/* Professional Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-32 h-32 bg-amber-400 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-emerald-400 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-blue-400 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
         
-        {/* Tigrinho no fundo */}
-        <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 text-6xl md:text-8xl opacity-30 animate-bounce">
-          🐅
-        </div>
-        <div className="absolute top-1/4 left-4 md:left-8 text-4xl md:text-6xl opacity-20 animate-pulse">
-          🐅
-        </div>
-        <div className="absolute top-2/3 right-1/4 text-5xl md:text-7xl opacity-25 animate-pulse" style={{ animationDelay: '1s' }}>
-          🐅
-        </div>
+        {/* Subtle decorative elements */}
+        <div className="absolute bottom-8 right-8 text-6xl opacity-10">♠</div>
+        <div className="absolute top-1/4 left-8 text-4xl opacity-10">♦</div>
+        <div className="absolute top-2/3 right-1/4 text-5xl opacity-10">♣</div>
+        <div className="absolute top-1/3 right-1/3 text-4xl opacity-10">♥</div>
       </div>
 
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 md:p-8">
-        {/* Header */}
-        <div className="text-center mb-6 md:mb-8">
-          <h1 className="text-3xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400 mb-2 md:mb-4 animate-fade-in">
-            🎰 CASINO DO TIGRINHO 🐅
+        {/* Professional Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 mb-4 tracking-wide">
+            🎲 CASSINO ROYAL 🎰
           </h1>
-          <p className="text-sm md:text-xl text-white/80 animate-fade-in px-4">
-            Quatro jogos emocionantes! Aposte a partir de 5 moedas
+          <div className="w-32 h-1 bg-gradient-to-r from-amber-400 to-yellow-500 mx-auto mb-4"></div>
+          <p className="text-lg md:text-xl text-gray-300 font-medium">
+            Jogos Premium • Apostas a partir de 5 moedas
           </p>
         </div>
 
         {/* Coins Display */}
-        <div className="mb-6 md:mb-8 bg-black/30 backdrop-blur-sm rounded-xl md:rounded-2xl px-6 md:px-8 py-3 md:py-4 border border-yellow-400/30">
-          <div className="flex items-center gap-2 md:gap-3">
-            <span className="text-2xl md:text-3xl">🪙</span>
-            <span className="text-xl md:text-2xl font-bold text-yellow-400">{coins}</span>
-            <span className="text-sm md:text-base text-white/70">moedas</span>
+        <div className="mb-8 bg-gradient-to-r from-slate-800 to-gray-800 backdrop-blur-sm rounded-xl px-8 py-4 border border-amber-400/20 shadow-2xl">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">🪙</span>
+            <span className="text-2xl font-bold text-amber-400">{coins}</span>
+            <span className="text-base text-gray-300 font-medium">moedas</span>
           </div>
         </div>
 
         {/* Game Navigation */}
-        <div className="mb-6 md:mb-8 flex flex-wrap justify-center gap-2">
+        <div className="mb-8 flex flex-wrap justify-center gap-3">
           {Object.entries(games).map(([key, game]) => (
             <Button
               key={key}
               onClick={() => setCurrentGame(key as GameType)}
-              className={`px-4 py-2 rounded-full font-bold transition-all duration-200 ${
+              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 currentGame === key
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black ring-2 ring-yellow-300'
-                  : 'bg-black/50 text-white hover:bg-black/70 border border-yellow-400/30'
+                  ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-black shadow-lg scale-105'
+                  : 'bg-slate-800 text-gray-300 hover:bg-slate-700 border border-gray-600 hover:border-amber-400/50'
               }`}
             >
               {game.name}
@@ -96,37 +92,47 @@ const Index = () => {
         </div>
 
         {/* Current Game */}
-        {games[currentGame].component}
+        <div className="w-full max-w-4xl">
+          {games[currentGame].component}
+        </div>
 
-        {/* Instructions */}
-        <div className="mt-6 md:mt-8 text-center text-white/60 max-w-sm md:max-w-md px-4">
+        {/* Professional Instructions */}
+        <div className="mt-8 text-center text-gray-400 max-w-2xl px-4">
           {currentGame === 'slots' && (
-            <>
-              <p className="mb-2 text-sm md:text-base">🎯 Combine 3 símbolos para ganhar!</p>
-              <p className="mb-2 text-sm md:text-base">💎 Diamante: 100x | 7️⃣ Sete: 50x</p>
-              <p className="text-xs md:text-base">⭐ Estrela: 20x | 🍒 Cereja: 10x | 🔔 Sino: 5x</p>
-            </>
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="mb-2 text-base font-medium text-gray-300">🎯 Combine 3 símbolos para ganhar!</p>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <p>💎 Diamante: 100x</p>
+                <p>7️⃣ Sete: 50x</p>
+                <p>⭐ Estrela: 20x</p>
+                <p>🍒 Cereja: 10x</p>
+                <p>🔔 Sino: 5x</p>
+                <p>🍋 Limão: 3x</p>
+              </div>
+            </div>
           )}
           {currentGame === 'dice' && (
-            <>
-              <p className="mb-2 text-sm md:text-base">🎯 Aposte no resultado da soma dos dados!</p>
-              <p className="text-xs md:text-base">🎲 Baixo/Alto: 2x | Sete: 5x</p>
-            </>
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="mb-2 text-base font-medium text-gray-300">🎯 Aposte no resultado da soma dos dados!</p>
+              <p className="text-sm">🎲 Baixo/Alto: 2x | Sete: 5x</p>
+            </div>
           )}
           {currentGame === 'roulette' && (
-            <>
-              <p className="mb-2 text-sm md:text-base">🎯 Aposte em uma cor e torça!</p>
-              <p className="text-xs md:text-base">🔴🔵 Vermelho/Preto: 2x | 🟢 Verde: 35x</p>
-            </>
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="mb-2 text-base font-medium text-gray-300">🎯 Aposte em uma cor e torça!</p>
+              <p className="text-sm">🔴🔵 Vermelho/Preto: 2x | 🟢 Verde: 35x</p>
+            </div>
           )}
           {currentGame === 'blackjack' && (
-            <>
-              <p className="mb-2 text-sm md:text-base">🎯 Chegue o mais próximo de 21!</p>
-              <p className="text-xs md:text-base">🃏 Blackjack: 2.5x | Vitória normal: 2x</p>
-            </>
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="mb-2 text-base font-medium text-gray-300">🎯 Chegue o mais próximo de 21!</p>
+              <p className="text-sm">🃏 Blackjack: 2.5x | Vitória normal: 2x</p>
+            </div>
           )}
           {currentGame === 'shop' && (
-            <p className="text-xs md:text-base">💳 Compre moedas para continuar jogando! Apenas R$ 0,20 por moeda</p>
+            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
+              <p className="text-sm text-gray-300">💳 Compre moedas para continuar jogando! Apenas R$ 0,20 por moeda</p>
+            </div>
           )}
         </div>
       </div>
