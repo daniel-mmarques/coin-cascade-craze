@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button';
 import SlotMachine from '@/components/SlotMachine';
 import Dice from '@/components/Dice';
 import Roulette from '@/components/Roulette';
-import Blackjack from '@/components/Blackjack';
 import CoinExplosion from '@/components/CoinExplosion';
 import { useCoins } from '@/hooks/useCoins';
 
-type GameType = 'slots' | 'dice' | 'roulette' | 'blackjack';
+type GameType = 'slots' | 'dice' | 'roulette';
 
 const Index = () => {
   const [showCoins, setShowCoins] = useState(false);
@@ -29,7 +28,6 @@ const Index = () => {
     slots: { name: '🎰 Slots', component: <SlotMachine onWin={handleWin} onSpin={handleSpin} /> },
     dice: { name: '🎲 Dados', component: <Dice onWin={handleWin} onSpin={handleSpin} /> },
     roulette: { name: '🎡 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
-    blackjack: { name: '🃏 Blackjack', component: <Blackjack onWin={handleWin} onSpin={handleSpin} /> },
   };
 
   return (
@@ -115,12 +113,6 @@ const Index = () => {
             <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
               <p className="mb-2 text-base font-medium text-gray-300">🎯 Aposte em uma cor e torça!</p>
               <p className="text-sm">🔴🔵 Vermelho/Preto: 2x | 🟢 Verde: 35x</p>
-            </div>
-          )}
-          {currentGame === 'blackjack' && (
-            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="mb-2 text-base font-medium text-gray-300">🎯 Chegue o mais próximo de 21!</p>
-              <p className="text-sm">🃏 Blackjack: 2.5x | Vitória normal: 2x</p>
             </div>
           )}
         </div>
