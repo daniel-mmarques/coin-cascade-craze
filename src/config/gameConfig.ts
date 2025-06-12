@@ -2,7 +2,7 @@
 // 🎯 CONFIGURAÇÃO GLOBAL DE CHANCE DE VITÓRIA DO CASSINO
 export const CASINO_CONFIG = {
   // Ajuste este valor para controlar a chance de vitória em todos os jogos
-  WIN_CHANCE: 0.35,
+  WIN_CHANCE: 0.05,
 };
 
 // Função para verificar se o jogador deve ganhar
