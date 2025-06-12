@@ -130,7 +130,7 @@ const Roulette = ({ onWin, onSpin }: RouletteProps) => {
           
           {/* Wheel with numbers */}
           <div 
-            className="absolute inset-2 rounded-full relative overflow-hidden transition-transform duration-4000 ease-out shadow-inner bg-gradient-to-br from-amber-900 to-amber-800"
+            className="absolute inset-2 rounded-full relative overflow-hidden transition-transform duration-4000 ease-out shadow-inner"
             style={{ 
               transform: `rotate(${wheelRotation}deg)`,
             }}
