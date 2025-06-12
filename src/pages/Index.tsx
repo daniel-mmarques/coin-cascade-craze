@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import SlotMachine from '@/components/SlotMachine';
 import Dice from '@/components/Dice';
-import Roulette from '@/components/Roulette';
 import CoinExplosion from '@/components/CoinExplosion';
 import { useCoins } from '@/hooks/useCoins';
 
-type GameType = 'slots' | 'dice' | 'roulette';
+type GameType = 'slots' | 'dice';
 
 const Index = () => {
   const [showCoins, setShowCoins] = useState(false);
@@ -27,7 +26,6 @@ const Index = () => {
   const games = {
     slots: { name: '🎰 Slots', component: <SlotMachine onWin={handleWin} onSpin={handleSpin} /> },
     dice: { name: '🎲 Dados', component: <Dice onWin={handleWin} onSpin={handleSpin} /> },
-    roulette: { name: '🎡 Roleta', component: <Roulette onWin={handleWin} onSpin={handleSpin} /> },
   };
 
   return (
@@ -107,12 +105,6 @@ const Index = () => {
             <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
               <p className="mb-2 text-base font-medium text-gray-300">🎯 Aposte no resultado da soma dos dados!</p>
               <p className="text-sm">🎲 Baixo/Alto: 2x | Sete: 5x</p>
-            </div>
-          )}
-          {currentGame === 'roulette' && (
-            <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
-              <p className="mb-2 text-base font-medium text-gray-300">🎯 Aposte em uma cor e torça!</p>
-              <p className="text-sm">🔴🔵 Vermelho/Preto: 2x | 🟢 Verde: 35x</p>
             </div>
           )}
         </div>
