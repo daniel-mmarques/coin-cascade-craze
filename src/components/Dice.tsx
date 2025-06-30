@@ -226,7 +226,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
               : 'bg-gradient-to-br from-green-600 to-green-800 hover:from-green-500 hover:to-green-700 shadow-md hover:scale-102'
           }`}
         >
-          📉 BAIXO<br/>
+          📉 BAIXO <br/>
           <span className="text-xs opacity-80">(2-6) Paga 2x</span>
         </Button>
         <Button
@@ -238,7 +238,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
               : 'bg-gradient-to-br from-yellow-600 to-orange-700 hover:from-yellow-500 hover:to-orange-600 shadow-md hover:scale-102'
           }`}
         >
-          7️⃣ SETE<br/>
+          7️⃣ SETE <br/>
           <span className="text-xs opacity-80">Paga 5x</span>
         </Button>
         <Button
@@ -250,7 +250,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
               : 'bg-gradient-to-br from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 shadow-md hover:scale-102'
           }`}
         >
-          📈 ALTO<br/>
+          📈 ALTO <br/>
           <span className="text-xs opacity-80">(8-12) Paga 2x</span>
         </Button>
       </div>
