@@ -92,10 +92,10 @@ const Index = () => {
             <div className="bg-slate-800/50 rounded-lg p-4 border border-gray-700">
               <p className="mb-2 text-base font-medium text-gray-300">🎯 Combine 3 símbolos para ganhar!</p>
               <div className="grid grid-cols-2 gap-2 text-sm">
-                <p>💎 Diamante: 100x</p>
-                <p>7️⃣ Sete: 50x</p>
-                <p>⭐ Estrela: 20x</p>
-                <p>🍒 Cereja: 10x</p>
+                <p>💎 Diamante: 25x</p>
+                <p>7️⃣ Sete: 15x</p>
+                <p>⭐ Estrela: 10x</p>
+                <p>🍒 Cereja: 8x</p>
                 <p>🔔 Sino: 5x</p>
                 <p>🍋 Limão: 3x</p>
               </div>
