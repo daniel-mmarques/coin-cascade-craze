@@ -239,7 +239,7 @@ const Dice = ({ onWin, onSpin }: DiceProps) => {
           }`}
         >
           7️⃣ SETE 
-          <span className="text-xs opacity-80"><br/>Paga 5x</span>
+          <span className="text-xs opacity-80">Paga 5x</span>
         </Button>
         <Button
           onClick={() => setSelectedBet('high')}
