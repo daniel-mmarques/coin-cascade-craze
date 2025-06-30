@@ -40,13 +40,13 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
     
     if (first === second && second === third) {
       switch (first) {
-        case '💎': return 50; // 100x multiplier
-        case '7️⃣': return 25;  // 50x multiplier
-        case '⭐': return 15;   // 20x multiplier
-        case '🍒': return 10;   // 10x multiplier
-        case '🔔': return 8;    // 5x multiplier
-        case '🍋': return 4;    // 3x multiplier
-        default: return 2;      // 2x multiplier
+        case '💎': return 25; // 100x multiplier
+        case '7️⃣': return 15;  // 50x multiplier
+        case '⭐': return 10;   // 20x multiplier
+        case '🍒': return 8;   // 10x multiplier
+        case '🔔': return 5;    // 5x multiplier
+        case '🍋': return 3;    // 3x multiplier
+        default: return 1.5;      // 2x multiplier
       }
     }
     
@@ -88,7 +88,7 @@ const SlotMachine = ({ onWin, onSpin }: SlotMachineProps) => {
         onWin(winAmount);
         
         let title = "Você Ganhou!";
-        if (multiplier >= 50) title = "🎉 JACKPOT! 🎉";
+        if (multiplier >= 25) title = "🎉 JACKPOT! 🎉";
         else if (multiplier >= 10) title = "🎊 Grande Vitória! 🎊";
         
         toast({
